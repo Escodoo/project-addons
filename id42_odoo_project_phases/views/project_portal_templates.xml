@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!-- Phases portal_my_tasks -->
+<template id="portal_my_tasks"
+          inherit_id="project.portal_my_tasks"
+          name="Add phases policy checkbox">
+    
+    <xpath expr="//thead/tr/th[last()]"
+           position="before">
+        <th class="text-center">Phase</th>
+    </xpath>
+
+    <xpath expr="//tbody/t/tr/td[last()]"
+           position="before">
+        <th class="text-center">
+            <span class="badge badge-pill badge-info" title="Current phase of the task" t-esc="task.phase_id.name" />
+        </th>
+    </xpath>
+
+</template>
+
+<template id="portal_my_task"
+          inherit_id="project.portal_my_task"
+          name="Add phases policy checkbox">
+    
+    <xpath expr="//t/t/t/div/div[last()]/small"
+           position="before">
+
+            <small class="text-right">Phase:</small>
+            <span t-field="task.phase_id.name" class=" badge badge-pill badge-info" title="Current phase of this task"/>
+
+    </xpath>
+
+</template>
+
+
+</odoo>
