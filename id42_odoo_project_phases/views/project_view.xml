@@ -155,7 +155,6 @@
         <record id="open_task_phase_form" model="ir.actions.act_window">
             <field name="name">Project Phases</field>
             <field name="res_model">project.task.phase</field>
-            <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="view_id" ref="task_phase_tree"/>
         </record>
