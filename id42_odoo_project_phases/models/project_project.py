@@ -19,8 +19,7 @@ class ProjectPhase(models.Model):
     user_id = fields.Many2one('res.users', string='Responsible User', default=lambda self: self.env.uid)
     task_count = fields.Integer(compute="get_task",string='Count')
     notes = fields.Text(string='Notes')
-    
-    @api.multi
+
     def action_project_phase_task(self):
         self.ensure_one()
         return {
@@ -30,8 +29,7 @@ class ProjectPhase(models.Model):
             'res_model': 'project.task',
             'domain': [('phase_id', '=', self.id)],
         }
-    
-    @api.multi
+
     def get_task(self):
         for rec in self:
             records = self.env['project.task'].search([('phase_id','=',rec.id)])
@@ -47,14 +45,12 @@ class ProjectProject(models.Model):
     _inherit='project.project'
     
     project_phase_count = fields.Integer('Job Note', compute='_get_project_phase_count')
-    
-    @api.multi
+
     def _get_project_phase_count(self):
         for project_phase in self:
             project_phase_ids = self.env['project.task.phase'].search([('project_id','=',project_phase.id)])
             project_phase.project_phase_count = len(project_phase_ids)
-        
-    @api.multi
+
     def action_project_phase(self):
         self.ensure_one()
         return {
@@ -69,8 +65,7 @@ class ReportProjectTaskUser(models.Model):
     _inherit = "report.project.task.user"
     
     phase_id = fields.Many2one('project.task.phase', string='Project Phase')
-    
-    
+
     def _select(self):
         select_str = """
              SELECT

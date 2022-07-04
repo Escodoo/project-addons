@@ -21,8 +21,8 @@
     'depends': ['project'],
     'data': [
         'security/ir.model.access.csv',
-        'views/project_view.xml',
-        'views/project_portal_templates.xml',
+        # 'views/project_view.xml',
+        # 'views/project_portal_templates.xml',
     ],
     'installable': True,
     'auto_install': False,
