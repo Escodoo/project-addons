@@ -20,19 +20,19 @@
 
 </template>
 
-<template id="portal_my_task"
-          inherit_id="project.portal_my_task"
-          name="Add phases policy checkbox">
+<!--<template id="portal_my_task"-->
+<!--          inherit_id="project.portal_my_task"-->
+<!--          name="Add phases policy checkbox">-->
     
-    <xpath expr="//t/t/t/div/div[last()]/small"
-           position="before">
+<!--    <xpath expr="//t/t/t/div/div[last()]/small"-->
+<!--           position="before">-->
 
-            <small class="text-right">Phase:</small>
-            <span t-field="task.phase_id.name" class=" badge badge-pill badge-info" title="Current phase of this task"/>
+<!--            <small class="text-right">Phase:</small>-->
+<!--            <span t-field="task.phase_id.name" class=" badge badge-pill badge-info" title="Current phase of this task"/>-->
 
-    </xpath>
+<!--    </xpath>-->
 
-</template>
+<!--</template>-->
 
 
 </odoo>
