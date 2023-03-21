@@ -15,6 +15,12 @@ Project Addons
 
 [//]: # (addons)
 
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[project_sla](project_sla/) | 12.0.1.0.0 |  | Project SLA
+
 [//]: # (end addons)
 
 <!-- prettier-ignore-end -->
