@@ -1,6 +1,6 @@
 <!-- [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat//12.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-project-addons-) -->
-[![Build Status](https://travis-ci.com/Escodoo/project-addons.svg?branch=12.0)](https://travis-ci.com/Escodoo/project-addons)
-<!-- [![codecov](https://codecov.io/gh/Escodoo/project-addons/branch/12.0/graph/badge.svg)](https://codecov.io/gh/Escodoo/project-addons) -->
+<!-- [![Build Status](https://travis-ci.com/Escodoo/project-addons.svg?branch=12.0)](https://travis-ci.com/Escodoo/project-addons) -->
+[![codecov](https://codecov.io/gh/Escodoo/project-addons/branch/12.0/graph/badge.svg)](https://codecov.io/gh/Escodoo/project-addons)
 <!-- [![Translation Status](https://translation.odoo-community.org/widgets/project-addons-12-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/project-addons-12-0/?utm_source=widget) -->
 
 <!-- /!\ do not modify above this line -->
