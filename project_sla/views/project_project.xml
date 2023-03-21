@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="project_project_view_form">
+        <field name="name">project.project.form (in project_sla)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <field name="subtask_project_id" position="after">
+                <field name="use_sla" />
+                <field name="resource_calendar_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
