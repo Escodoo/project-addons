@@ -1,0 +1,3 @@
+To start using the Project SLA module, it is necessary to configure the projects projects to use SLAs and define a calendar for the rules to be applied. Once the projects project is configured, the user can create a new SLA by navigating to the "Project" application and selecting "SLAs" from the configuration menu. From there, the user can create a new SLA and configure the rules based on the fields mentioned above.
+
+After creating the SLAs, create a new task and wait for the scheduled action responsible for synchronizing the SLA lines to be executed or force its execution through the technical menu where the scheduled actions are located.

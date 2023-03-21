@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_sla_user,Access Project SLA User,model_project_sla,base.group_user,1,0,0,0
+access_project_sla_manager,Access Project SLA Manager,model_project_sla,project.group_project_manager,1,1,1,1
+access_project_sla_line_user,Access Project SLA Line User,model_project_sla_line,base.group_user,1,0,0,0
+access_project_sla_line_manager,Access Project SLA Line Manager,model_project_sla_line,base.group_no_one,1,1,1,1
