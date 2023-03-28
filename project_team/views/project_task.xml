@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 - TODAY Escodoo
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- FORM -->
+    <record model="ir.ui.view" id="project_task_form_view">
+        <field name="name">project.task.form (in project_team)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="team_id" invisible="1" />
+                <field name="team_member_ids" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+    <!-- FORM QUICK TASK -->
+    <record model="ir.ui.view" id="project_task_form_view_quick_create">
+        <field name="name">project.task.form.quick_create(in project_team)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="team_id" invisible="1" />
+                <field name="team_member_ids" invisible="1" />
+                <field
+                    name="project_id"
+                    invisible="1"
+                    domain="[('active', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="project_task_tree_view">
+        <field name="name">project.task.tree (in project_team)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2" />
+        <field name="arch" type="xml">
+            <tree>
+                <field name="team_id" />
+            </tree>
+        </field>
+    </record>
+</odoo>
