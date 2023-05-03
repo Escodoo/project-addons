@@ -16,7 +16,8 @@
         "views/project_sla_line.xml",
         "views/project_project.xml",
         "security/ir.model.access.csv",
-        "data/ir_cron_data.xml",
+        # TODO: os métodos utilizados pelo CRON precisam ser revisados
+        # "data/ir_cron_data.xml",
     ],
     "demo": [],
 }
