@@ -11,10 +11,10 @@ class ProjectProject(models.Model):
     team_id = fields.Many2one("project.team", string="Team")
     project_status_id = fields.Many2one(
         "project.status",
-        string="Project Status",
+        string="Project Status IDS",
         group_expand="_read_group_status_ids",
         copy=False,
-        domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]",
+        domain="[('team_id', '=', team_id)]",
         ondelete="restrict",
         index=True,
     )
@@ -42,16 +42,12 @@ class ProjectProject(models.Model):
             project_status_ids = self.env["project.status"].search(
                 [("team_id", "=", self.team_id.id)]
             )
-            if project_status_ids:
-                self.project_status_id = project_status_ids[0]
-            else:
-                self.project_status_id = False
         else:
             project_status_ids = self.env["project.status"].search(
                 [("team_id", "=", False)]
             )
-            if project_status_ids:
-                self.project_status_id = project_status_ids[0]
-            else:
-                self.project_status_id = False
-        return {"domain": {"project_status_id": [("team_id", "=", self.team_id.id)]}}
+        if project_status_ids:
+            self.project_status_id = project_status_ids[0]
+        else:
+            self.project_status_id = False
+        return {"project_status_id": self.project_status_id.id}

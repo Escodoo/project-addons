@@ -10,7 +10,7 @@ class ProjectTask(models.Model):
     team_id = fields.Many2one(
         "project.team", string="Team", related="project_id.team_id"
     )
-    user_id = fields.Many2many(
+    user_id = fields.Many2one(
         "res.users", string="Assigned to", domain="[('id', 'in', team_member_ids)]"
     )
     team_member_ids = fields.Many2many(

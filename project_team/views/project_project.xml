@@ -36,7 +36,11 @@
             </xpath>
             <xpath expr="//field[@name='project_status']" position="before">
                 <field name="team_id" />
-                <field name="project_status_id" required="True" />
+                <field
+                    name="project_status_id"
+                    string="Project Status"
+                    required="True"
+                />
             </xpath>
         </field>
     </record>
