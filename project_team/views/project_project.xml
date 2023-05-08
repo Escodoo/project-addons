@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 - TODAY Escodoo
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- TREE -->
+    <record model="ir.ui.view" id="project_project_tree_view">
+        <field name="name">project.project.tree (in project_team)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="team_id" />
+            </xpath>
+        </field>
+    </record>
+    <!-- FORM -->
+    <record model="ir.ui.view" id="project_project_form_view">
+        <field name="name">project.project.form (in project_team)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="team_id" />
+            </xpath>
+        </field>
+    </record>
+    <!-- SIMPLIFIED FORM -->
+    <record model="ir.ui.view" id="project_project_view_form_simplified">
+        <field name="name">project.project.form.simplified (in project_team)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_status']" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='project_status']" position="before">
+                <field name="team_id" />
+                <field
+                    name="project_status_id"
+                    string="Project Status"
+                    required="True"
+                />
+            </xpath>
+        </field>
+    </record>
+    <!-- FILTER -->
+    <record model="ir.ui.view" id="project_view_project_project_filter">
+        <field name="name">project.project.filter (in project_team)</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='my_projects']" position="before">
+                <field name="team_id" />
+                <filter
+                    string="My Team's Projects"
+                    name="my_team_projects"
+                    domain="[ '|', ('team_id.user_ids', 'in', [uid]), ('team_id', '=', False)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
