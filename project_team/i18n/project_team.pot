@@ -14,11 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: project_team
-#: model:ir.model.fields,field_description:project_team.field_project_task__user_id
-msgid "Assigned to"
-msgstr ""
-
-#. module: project_team
 #: model:ir.model.fields,field_description:project_team.field_project_team__create_uid
 msgid "Created by"
 msgstr ""
