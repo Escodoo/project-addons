@@ -10,9 +10,6 @@ class ProjectTask(models.Model):
     team_id = fields.Many2one(
         "project.team", string="Team", related="project_id.team_id"
     )
-    user_id = fields.Many2one(
-        "res.users", string="Assigned to", domain="[('id', 'in', team_member_ids)]"
-    )
     team_member_ids = fields.Many2many(
         "res.users", string="Team Members", compute="_compute_team_member_ids"
     )
@@ -27,8 +24,6 @@ class ProjectTask(models.Model):
                 all_users = self.env["res.users"].search([])
                 if all_users:
                     task.team_member_ids = [(6, 0, all_users.ids)]
-                else:
-                    task.team_member_ids = False
 
     @api.model
     def create(self, vals):

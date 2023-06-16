@@ -12,6 +12,9 @@
                 <field name="team_id" invisible="1" />
                 <field name="team_member_ids" invisible="1" />
             </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('id', 'in', team_member_ids)]</attribute>
+            </xpath>
         </field>
     </record>
     <!-- FORM QUICK TASK -->
@@ -28,6 +31,9 @@
                     invisible="1"
                     domain="[('active', '=', True)]"
                 />
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('id', 'in', team_member_ids)]</attribute>
             </xpath>
         </field>
     </record>
