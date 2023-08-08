@@ -122,7 +122,8 @@ class ProjectTask(models.Model):
                 sla_line.reached_date and sla_line.reached_date > sla_deadline
             ):
                 sla_line.status = "not_met"
-            else:
+
+            if (sla_line.reached_date and sla_line.reached_date < sla_deadline):
                 sla_line.status = "met"
             sla_lines.append(
                 (
@@ -145,48 +146,40 @@ class ProjectTask(models.Model):
 
     @api.model
     def _sla_reset_trigger(self):
-        """Get the list of field for which we have to reset
-        the SLAs (regenerate)"""
         return ["project_id", "priority", "partner_id", "tag_ids"]
 
     def _sla_find(self):
-        """Find the SLA to apply on the current tasks
-        :returns a map with the tasks linked to the SLA to apply on them
-        :rtype : dict {<project.task>: <project.sla>}
-        """
-        tasks_map = {}
+        records_map = {}
         sla_domain_map = {}
 
-        def _generate_key(task):
-            """Return a tuple identifying the combination of
-            fields determining the SLA to apply on the task"""
-            fields_list = task._sla_reset_trigger()
+        def _generate_key(record):
+            fields_list = record._sla_reset_trigger()
             key = []
             for field_name in fields_list:
-                if task._fields[field_name].type == "many2one":
-                    key.append(task[field_name].id)
+                if record._fields[field_name].type == "many2one":
+                    key.append(record[field_name].id)
                 else:
-                    key.append(task[field_name])
+                    key.append(record[field_name])
             return tuple(key)
 
-        for task in self:
-            if task.project_id.use_sla:
-                key = _generate_key(task)
-                tasks_map.setdefault(key, self.env["project.task"])
-                tasks_map[key] |= task
+        for record in self:
+            if record.project_id.use_sla:
+                key = _generate_key(record)
+                records_map.setdefault(key, self.env["project.task"])
+                records_map[key] |= record
                 if key not in sla_domain_map:
                     sla_domain_map[key] = expression.AND(
                         [
                             [
-                                ("project_id", "=", task.project_id.id),
-                                ("priority", "=", task.priority),
+                                ("project_id", "=", record.project_id.id),
+                                ("priority", "=", record.priority),
                             ],
-                            task._sla_find_extra_domain(),
+                            record._sla_find_extra_domain(),
                         ]
                     )
 
         result = {}
-        for key, tasks in tasks_map.items():
+        for key, tasks in records_map.items():
             domain = sla_domain_map[key]
             slas = self.env["project.sla"].search(domain)
             result[tasks] = slas.filtered(
@@ -200,26 +193,25 @@ class ProjectTask(models.Model):
         else:
             self._update_sla_lines()
 
-    # TODO: os métodos utilizados pelo CRON precisam ser revisados
-    # @api.model
-    # def _sync_all_sla_lines(self):
-    #     # TODO: For more performance is necessary not filter tasks with
-    #     #  probability equal 100. But is necessary check if reached_date is False.
-    #     tasks = (
-    #         self.env["project.task"]
-    #         .search([])
-    #         .filtered(
-    #             lambda r: (
-    #                 r.active
-    #                 and r.project_id.use_sla
-    #                 and any(not p.reached_date for p in r.sla_line_ids)
-    #                 or not r.sla_line_ids
-    #             )
-    #         )
-    #     )
-    #     for task in tasks:
-    #         task._sync_sla_lines()
-    #
-    # @api.model
-    # def cron_sync_all_sla_lines(self):
-    #     self._sync_all_sla_lines()
+    @api.model
+    def _sync_all_sla_lines(self):
+        records = (
+            self.env["project.task"]
+            .search([])
+            .filtered(
+                lambda r: (
+                    r.active
+                    and r.team_id.use_sla
+                    and r.create_date >= r.team_id.start_date_sla
+                    and (
+                        any(not p.reached_date for p in r.sla_line_ids)
+                        or not r.sla_line_ids)
+                )
+            )
+        )
+        for record in recors:
+            lead._sync_sla_lines()
+
+    @api.model
+    def cron_sync_all_sla_lines(self):
+        self._sync_all_sla_lines()
