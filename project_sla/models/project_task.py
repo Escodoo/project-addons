@@ -201,16 +201,15 @@ class ProjectTask(models.Model):
             .filtered(
                 lambda r: (
                     r.active
-                    and r.team_id.use_sla
-                    and r.create_date >= r.team_id.start_date_sla
+                    and r.project_id.use_sla
                     and (
                         any(not p.reached_date for p in r.sla_line_ids)
                         or not r.sla_line_ids)
                 )
             )
         )
-        for record in recors:
-            lead._sync_sla_lines()
+        for record in records:
+            record._sync_sla_lines()
 
     @api.model
     def cron_sync_all_sla_lines(self):
