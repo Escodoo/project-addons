@@ -123,7 +123,7 @@ class ProjectTask(models.Model):
             ):
                 sla_line.status = "not_met"
 
-            if (sla_line.reached_date and sla_line.reached_date < sla_deadline):
+            if sla_line.reached_date and sla_line.reached_date < sla_deadline:
                 sla_line.status = "met"
             sla_lines.append(
                 (
@@ -204,7 +204,8 @@ class ProjectTask(models.Model):
                     and r.project_id.use_sla
                     and (
                         any(not p.reached_date for p in r.sla_line_ids)
-                        or not r.sla_line_ids)
+                        or not r.sla_line_ids
+                    )
                 )
             )
         )
