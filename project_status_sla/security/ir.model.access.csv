@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_status_sla_user,Access Project Status SLA User,model_project_status_sla,base.group_user,1,0,0,0
+access_project_status_sla_manager,Access Project Status SLA Manager,model_project_status_sla,project.group_project_manager,1,1,1,1
+access_project_status_sla_line_user,Access Project Status SLA Line User,model_project_status_sla_line,base.group_user,1,0,0,0
+access_project_status_sla_line_manager,Access Project Status SLA Line Manager,model_project_status_sla_line,project.group_project_manager,1,1,1,1

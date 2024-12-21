@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 - TODAY, Kaynnan Lemes <kaynnan.lemes@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="project_status_sla_form">
+        <field name="name">project.status.sla.form (in project_status_sla)</field>
+        <field name="model">project.status.sla</field>
+        <field name="arch" type="xml">
+            <form string="SLA">
+                <sheet>
+                    <group>
+                        <group>
+                            <separator colspan="2" string="Apply on" />
+                            <field name="project_id" string="Reach Project" />
+                            <field name="stage_id" string="Reach Statuses" />
+                            <label for="time_days" string="Reach In" />
+                            <div class="o_row">
+                                <field name="days" /> days<br />
+                                    <field name="hours" /> hours<br />
+                            </div>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="Description of the policy..." />
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="project_status_sla_tree">
+        <field name="name">project.status.sla.tree (in project_status_sla)</field>
+        <field name="model">project.status.sla</field>
+        <field name="arch" type="xml">
+            <tree string="SLA">
+                <field name="project_id" />
+                <field name="stage_id" />
+                <field name="days" />
+                <field name="hours" />
+                <field name="note" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_project_status_sla_tree" model="ir.actions.act_window">
+        <field name="name">Project Statuses SLA</field>
+        <field name="res_model">project.status.sla</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="project_project"
+        name="Project Statuses SLA"
+        parent="project.menu_project_config"
+        action="action_project_status_sla_tree"
+        sequence="16"
+    />
+</odoo>

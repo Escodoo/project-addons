@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 - TODAY, Kaynnan Lemes <kaynnan.lemes@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="project_status_sla_line_tree_view">
+        <field name="name">project.status.sla.line.tree (in project_status_sla)</field>
+        <field name="model">project.status.sla.line</field>
+        <field name="arch" type="xml">
+            <tree string="SLA Lines" create="0">
+                <field name="project_id" readonly="1" />
+                <field name="stage_id" readonly="1" />
+                <field name="sla_id" readonly="1" />
+                <field name="sla_expired" readonly="1" />
+                <field name="sla_deadline" readonly="1" />
+                <field name="reached_date" readonly="1" />
+                <field name="status" readonly="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_project_status_sla_line_tree">
+        <field name="name">Project Statuses SLA Lines</field>
+        <field name="res_model">project.status.sla.line</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+    <menuitem
+        id="menu_project_sla_line_list"
+        name="Project Statuses SLA Lines"
+        parent="project.menu_project_report"
+        action="action_project_status_sla_line_tree"
+    />
+
+</odoo>
