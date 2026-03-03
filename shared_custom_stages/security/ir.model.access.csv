@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shared_custom_stage_user,shared.custom.stage.user,model_shared_custom_stage,project.group_project_user,1,0,0,0
+access_shared_custom_stage_admin,shared.custom.stage.admin,model_shared_custom_stage,project.group_project_manager,1,1,1,1
+access_unified_task_ticket_user,unified.task.ticket.user,model_unified_task_ticket,project.group_project_user,1,1,0,0
