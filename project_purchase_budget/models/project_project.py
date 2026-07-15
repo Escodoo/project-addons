@@ -65,6 +65,7 @@ class ProjectProject(models.Model):
         compute="_compute_is_purchase_budget_manager",
     )
 
+    @api.depends_context("uid")
     def _compute_is_purchase_budget_manager(self):
         is_manager = self.env.user.has_group(
             "project_purchase_budget.group_purchase_budget_manager"
