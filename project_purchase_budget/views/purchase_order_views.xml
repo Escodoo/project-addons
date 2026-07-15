@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_purchase_order_form_purchase_budget" model="ir.ui.view">
+        <field name="name">purchase.order.form.project.purchase.budget</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <field name="exceeds_project_purchase_budget" invisible="1" />
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('exceeds_project_purchase_budget', '=', False)]}"
+                >
+                    This purchase order exceeds the purchase budget of one or more
+                    linked projects. Manager approval (tier validation) is required
+                    before confirmation.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field
+                    name="exceeds_project_purchase_budget"
+                    attrs="{'invisible': [('exceeds_project_purchase_budget', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

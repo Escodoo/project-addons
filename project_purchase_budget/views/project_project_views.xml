@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_project_purchase_budget_form" model="ir.ui.view">
+        <field name="name">project.project.form.purchase.budget</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="purchase_budget"
+                    string="Purchase Budget"
+                    groups="project.group_project_user"
+                >
+                    <field name="is_purchase_budget_manager" invisible="1" />
+                    <field name="currency_id" invisible="1" />
+                    <group>
+                        <group string="Budget setup">
+                            <label for="purchase_budget_percent" />
+                            <div class="o_row" name="purchase_budget_percent_div">
+                                <field
+                                    name="purchase_budget_percent"
+                                    class="oe_inline"
+                                    attrs="{'readonly': [('is_purchase_budget_manager', '=', False)]}"
+                                />
+                                <span>%</span>
+                            </div>
+                            <field
+                                name="purchase_budget_sale_override"
+                                attrs="{'readonly': [('is_purchase_budget_manager', '=', False)]}"
+                            />
+                        </group>
+                        <group string="Indicators">
+                            <field name="purchase_budget_sale_amount" />
+                            <field name="purchase_budget_amount" />
+                            <field name="purchase_spent_amount" />
+                            <field name="purchase_remaining_amount" />
+                            <field name="purchase_consumed_percent" />
+                            <field name="project_contribution_amount" />
+                        </group>
+                    </group>
+                    <div class="text-muted" colspan="2">
+                        Planned vs actual: Purchase Budget (planned) compared to
+                        Purchase Spent (committed on confirmed purchase orders).
+                        Project Contribution = Sale Amount − Purchase Spent.
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
